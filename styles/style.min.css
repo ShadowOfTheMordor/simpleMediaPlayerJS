@@ -761,7 +761,7 @@ input.video-volume {
     margin-right: 5px;
 }
 
-.video-icon {
+.control-icon {
     margin-right: 5px;
 }
 
@@ -772,3 +772,13 @@ input.video-volume {
 .video-fullscreen {
     cursor: pointer;
 }
+
+.radio-volume {
+    max-width: 200px;
+    margin-right: 5px;
+}
+
+.radio-volume_off {
+    margin-right: 10px;
+}
+

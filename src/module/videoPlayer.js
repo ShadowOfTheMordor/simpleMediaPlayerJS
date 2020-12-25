@@ -1,3 +1,5 @@
+import { addZeroToTime } from "./supScript.js";
+
 // const videoPlayer = () => {
 //     console.log("Video Init");
 // };
@@ -38,9 +40,10 @@ export const videoPlayerInit = () => {
         }
     };
 
-    const toggleVideoPlay = () => {
-        if (document.fullscreenElement === videoPlayer)
-            return;
+    const toggleVideoPlay = (event) => {
+        // if (document.fullscreenElement === videoPlayer)
+        //     return;
+        event.preventDefault();
         if (videoPlayer.paused) {
             videoPlayer.play();
         } else {
@@ -53,7 +56,7 @@ export const videoPlayerInit = () => {
         videoPlayer.currentTime = 0;
     };
 
-    const addZeroToTime = (number) => number < 10 ? '0' + String(number) : String(number);
+    // const addZeroToTime = (number) => number < 10 ? '0' + String(number) : String(number);
 
     const changeVideoVolume = (curVolumeRange, maxVolumeRange) => {
         const volume = curVolumeRange / maxVolumeRange;
@@ -154,6 +157,14 @@ export const videoPlayerInit = () => {
         videoPlayer.requestFullscreen();
     });
 
+    videoPlayer.addEventListener("fullscreenchange", () => {
+        if (document.fullscreen) {
+            videoPlayer.controls = true;
+        } else {
+            videoPlayer.controls = false;
+        }
+    });
+
     videoPlayer.addEventListener("volumechange", () => {
         videoVolume.value = videoPlayer.volume * 100;
     });
@@ -163,6 +174,13 @@ export const videoPlayerInit = () => {
     //for setting starting volume
     changeVideoVolume(videoVolume.value, videoVolume.max);
 
+    // videoPlayer.controls = true;
+
+    videoPlayerInit.stop = () => {
+        // stopPlay();
+        videoPlayer.pause();
+        toggleButtonIcon();
+    };
 };
 
 
